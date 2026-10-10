@@ -1,0 +1,11 @@
+{
+  "description": "Synthetic data; demonstrates five chart types, not research results.",
+  "data": "benchmark/data.csv",
+  "examples": [
+    {"kind": "line", "x": "concurrency", "y": ["baseline_p95_ms", "candidate_p95_ms"], "xlabel": "Concurrent requests", "ylabel": "P95 latency / ms"},
+    {"kind": "bar", "x": "concurrency", "y": ["baseline_p95_ms", "candidate_p95_ms"], "xlabel": "Concurrent requests", "ylabel": "P95 latency / ms"},
+    {"kind": "scatter", "x": "concurrency", "y": ["baseline_p95_ms", "candidate_p95_ms"], "xlabel": "Concurrent requests", "ylabel": "P95 latency / ms"},
+    {"kind": "box", "y": ["baseline_p95_ms", "candidate_p95_ms"], "ylabel": "P95 latency / ms"},
+    {"kind": "hist", "y": ["baseline_p95_ms", "candidate_p95_ms"], "xlabel": "P95 latency / ms", "ylabel": "Count"}
+  ]
+}

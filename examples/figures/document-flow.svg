@@ -1,0 +1,168 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="740" viewBox="0 0 1120 740" role="img" lang="zh-CN" aria-labelledby="archify-diagram-title archify-diagram-description" data-preset="classic" data-quality-profile="showcase">
+<style>text { font-family: sans-serif; }
+.m-default{ fill: #94a3b8; }
+.m-emphasis{ fill: #059669; }
+.m-security{ fill: #e11d48; }
+.m-dashed{ fill: #7c3aed; }
+.c-grid{ stroke: #e2e8f0; fill: none; }
+.a-default{ stroke: #94a3b8; fill: none; }
+.c-mask{ fill: #ffffff; stroke: none; }
+.c-external{ fill: rgba(148, 163, 184, 0.18);   stroke: #64748b; }
+.semantic-sigil{
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.35;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0.76;
+      pointer-events: none;
+    }
+.s-external{ color: #64748b; }
+.t-primary{ fill: #0f172a; }
+.c-backend{ fill: rgba(52, 211, 153, 0.18);    stroke: #059669; }
+.s-backend{ color: #059669; }
+.c-database{ fill: rgba(167, 139, 250, 0.2);   stroke: #7c3aed; }
+.s-database{ color: #7c3aed; }
+.t-muted{ fill: #64748b; }
+</style>
+<rect width="1120" height="740" fill="white"/>
+        <title id="archify-diagram-title">论文材料处理示例</title>
+        <desc id="archify-diagram-description">由 Archify 生成的架构图。</desc>
+        <!-- Definitions -->
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-default" />
+          </marker>
+          <marker id="arrowhead-emphasis" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-emphasis" />
+          </marker>
+          <marker id="arrowhead-security" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-security" />
+          </marker>
+          <marker id="arrowhead-dashed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-dashed" />
+          </marker>
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" class="c-grid" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+
+        <!-- Background Grid -->
+        <rect width="100%" height="100%" fill="url(#grid)" />
+
+        <!-- Boundaries (behind everything) -->
+
+
+        <!-- Connection paths (before components for correct z-order) -->
+        <path data-edge-from="document" data-edge-to="converter" data-edge-label="XML 与附件" data-edge-key="0" data-composition-points="240,120;440,120" d="M 240 120 L 440 120" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="converter" data-edge-to="typesetting" data-edge-label="正文与表格" data-edge-key="1" data-composition-points="530,160;530,340" d="M 530 160 L 530 340" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="typesetting" data-edge-to="delivery" data-edge-label="PDF 与工程" data-edge-key="2" data-composition-points="620,380;820,380" d="M 620 380 L 820 380" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="figure-source" data-edge-to="vector" data-edge-label="矢量导出" data-edge-key="3" data-composition-points="240,640;440,640" d="M 240 640 L 440 640" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="vector" data-edge-to="typesetting" data-edge-label="论文插图" data-edge-key="4" data-composition-points="530,600;530,420" d="M 530 600 L 530 420" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+        <!-- Components -->
+        <g id="node-document" data-node-id="document" data-node-label="飞书文档" tabindex="0" role="button" aria-label="聚焦飞书文档，架构组件" aria-pressed="false" data-node-kind="external" data-node-context="架构组件">
+          <title>飞书文档 · 架构组件</title>
+          <rect x="60" y="80" width="180" height="80" rx="6" class="c-mask"/>
+          <rect x="60" y="80" width="180" height="80" rx="6" class="c-external" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="external" class="semantic-sigil s-external" transform="translate(66 86) scale(0.6875)">
+            <rect x="2.5" y="5" width="8.5" height="8" rx="1.5"/>
+            <path d="M8 2.5h5.5V8M13.5 2.5 7.5 8.5"/>
+          </g>
+          <text data-node-label="" x="150" y="124" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">飞书文档</text>
+        </g>
+
+        <g id="node-converter" data-node-id="converter" data-node-label="内容转换" tabindex="0" role="button" aria-label="聚焦内容转换，架构组件" aria-pressed="false" data-node-kind="backend" data-node-context="架构组件">
+          <title>内容转换 · 架构组件</title>
+          <rect x="440" y="80" width="180" height="80" rx="6" class="c-mask"/>
+          <rect x="440" y="80" width="180" height="80" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(446 86) scale(0.6875)">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
+          </g>
+          <text data-node-label="" x="530" y="124" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">内容转换</text>
+        </g>
+
+        <g id="node-typesetting" data-node-id="typesetting" data-node-label="模板排版" tabindex="0" role="button" aria-label="聚焦模板排版，架构组件" aria-pressed="false" data-node-kind="backend" data-node-context="架构组件">
+          <title>模板排版 · 架构组件</title>
+          <rect x="440" y="340" width="180" height="80" rx="6" class="c-mask"/>
+          <rect x="440" y="340" width="180" height="80" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(446 346) scale(0.6875)">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
+          </g>
+          <text data-node-label="" x="530" y="384" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">模板排版</text>
+        </g>
+
+        <g id="node-delivery" data-node-id="delivery" data-node-label="论文交付包" tabindex="0" role="button" aria-label="聚焦论文交付包，架构组件" aria-pressed="false" data-node-kind="database" data-node-context="架构组件">
+          <title>论文交付包 · 架构组件</title>
+          <rect x="820" y="340" width="180" height="80" rx="6" class="c-mask"/>
+          <rect x="820" y="340" width="180" height="80" rx="6" class="c-database" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(826 346) scale(0.6875)">
+            <ellipse cx="8" cy="4" rx="5" ry="2"/>
+            <path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/>
+          </g>
+          <text data-node-label="" x="910" y="384" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">论文交付包</text>
+        </g>
+
+        <g id="node-figure-source" data-node-id="figure-source" data-node-label="绘图源文件" tabindex="0" role="button" aria-label="聚焦绘图源文件，架构组件" aria-pressed="false" data-node-kind="external" data-node-context="架构组件">
+          <title>绘图源文件 · 架构组件</title>
+          <rect x="60" y="600" width="180" height="80" rx="6" class="c-mask"/>
+          <rect x="60" y="600" width="180" height="80" rx="6" class="c-external" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="external" class="semantic-sigil s-external" transform="translate(66 606) scale(0.6875)">
+            <rect x="2.5" y="5" width="8.5" height="8" rx="1.5"/>
+            <path d="M8 2.5h5.5V8M13.5 2.5 7.5 8.5"/>
+          </g>
+          <text data-node-label="" x="150" y="644" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">绘图源文件</text>
+        </g>
+
+        <g id="node-vector" data-node-id="vector" data-node-label="矢量图" tabindex="0" role="button" aria-label="聚焦矢量图，架构组件" aria-pressed="false" data-node-kind="backend" data-node-context="架构组件">
+          <title>矢量图 · 架构组件</title>
+          <rect x="440" y="600" width="180" height="80" rx="6" class="c-mask"/>
+          <rect x="440" y="600" width="180" height="80" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(446 606) scale(0.6875)">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
+          </g>
+          <text data-node-label="" x="530" y="644" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">矢量图</text>
+        </g>
+
+        <!-- Connection labels -->
+        <g data-detail="context" data-edge-from="document" data-edge-to="converter" data-edge-label="XML 与附件" data-edge-key="0">
+          <rect x="311" y="100" width="58" height="14" rx="3" class="c-mask"/>
+          <text x="340" y="110" class="t-muted" font-size="8" text-anchor="middle">XML 与附件</text>
+        </g>
+        <g data-detail="context" data-edge-from="converter" data-edge-to="typesetting" data-edge-label="正文与表格" data-edge-key="1">
+          <rect x="501" y="240" width="58" height="14" rx="3" class="c-mask"/>
+          <text x="530" y="250" class="t-muted" font-size="8" text-anchor="middle">正文与表格</text>
+        </g>
+        <g data-detail="context" data-edge-from="typesetting" data-edge-to="delivery" data-edge-label="PDF 与工程" data-edge-key="2">
+          <rect x="691" y="360" width="58" height="14" rx="3" class="c-mask"/>
+          <text x="720" y="370" class="t-muted" font-size="8" text-anchor="middle">PDF 与工程</text>
+        </g>
+        <g data-detail="context" data-edge-from="figure-source" data-edge-to="vector" data-edge-label="矢量导出" data-edge-key="3">
+          <rect x="315.8" y="620" width="48.4" height="14" rx="3" class="c-mask"/>
+          <text x="340" y="630" class="t-muted" font-size="8" text-anchor="middle">矢量导出</text>
+        </g>
+        <g data-detail="context" data-edge-from="vector" data-edge-to="typesetting" data-edge-label="论文插图" data-edge-key="4">
+          <rect x="505.8" y="580" width="48.4" height="14" rx="3" class="c-mask"/>
+          <text x="530" y="590" class="t-muted" font-size="8" text-anchor="middle">论文插图</text>
+        </g>
+
+        <!-- Boundary labels (foreground masks keep routes out of titles) -->
+
+
+        <!-- Legend -->
+        <g data-legend="" data-legend-bridge="">
+          <text x="40" y="704" class="t-primary" font-size="12" font-weight="650">图例</text>
+          <g data-legend-semantic-kind="backend" data-legend-kind="backend" data-legend-label="后端" data-legend-x="40" data-legend-baseline="724" data-legend-width="63">
+            <rect x="40" y="715" width="16" height="10" rx="2.5" class="c-backend" stroke-width="1"/>
+            <text x="62" y="724" class="t-muted" font-size="10" font-weight="500">后端</text>
+          </g>
+          <g data-legend-semantic-kind="database" data-legend-kind="database" data-legend-label="数据库" data-legend-x="125" data-legend-baseline="724" data-legend-width="73">
+            <rect x="125" y="715" width="16" height="10" rx="2.5" class="c-database" stroke-width="1"/>
+            <text x="147" y="724" class="t-muted" font-size="10" font-weight="500">数据库</text>
+          </g>
+          <g data-legend-semantic-kind="external" data-legend-kind="external" data-legend-label="外部系统" data-legend-x="220" data-legend-baseline="724" data-legend-width="83">
+            <rect x="220" y="715" width="16" height="10" rx="2.5" class="c-external" stroke-width="1"/>
+            <text x="242" y="724" class="t-muted" font-size="10" font-weight="500">外部系统</text>
+          </g>
+        </g>
+      </svg>

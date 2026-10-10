@@ -1,0 +1,15 @@
+<title id="demo-title">文档转换合成样例</title>
+<h1 id="demo-section">输入与排版</h1>
+<p id="demo-paragraph">本样例用于检查转换能力，不是论文或实验材料。包含<b>粗体</b>、<em>斜体</em>、特殊字符 A &amp; B，以及行内公式 <latex>y=\frac{x}{2}</latex>。</p>
+<ul id="demo-list"><li id="demo-item-one">正文从飞书导出的 XML 读取。</li><li id="demo-item-two">图片和电子表格通过本地映射提供。</li></ul>
+<grid id="demo-grid">
+  <column width-ratio="0.65"><img id="demo-wide" token="wide-image" width="1200" height="360" caption="合成横向占位图"/></column>
+  <column width-ratio="0.35"><img id="demo-tall" token="tall-image" width="360" height="1000" caption="合成纵向占位图"/></column>
+</grid>
+<table id="demo-table">
+  <thead><tr><th>项目</th><th>预期结果</th></tr></thead>
+  <tbody><tr><td>正文</td><td>保留段落和行内样式</td></tr><tr><td>表格</td><td>原生表格，跨页重复表头</td></tr></tbody>
+</table>
+<sheet id="demo-sheet" token="sheet-values"/>
+<pre id="demo-code" lang="python" caption="合成代码片段"><code>def half(value):
+    return value / 2</code></pre>

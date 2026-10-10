@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "论文材料处理示例",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "viewBox": [1120, 740]
+  },
+  "components": [
+    {"id": "document", "type": "external", "label": "飞书文档", "pos": [60, 80], "size": [180, 80]},
+    {"id": "converter", "type": "backend", "label": "内容转换", "pos": [440, 80], "size": [180, 80]},
+    {"id": "typesetting", "type": "backend", "label": "模板排版", "pos": [440, 340], "size": [180, 80]},
+    {"id": "delivery", "type": "database", "label": "论文交付包", "pos": [820, 340], "size": [180, 80]},
+    {"id": "figure-source", "type": "external", "label": "绘图源文件", "pos": [60, 600], "size": [180, 80]},
+    {"id": "vector", "type": "backend", "label": "矢量图", "pos": [440, 600], "size": [180, 80]}
+  ],
+  "connections": [
+    {"from": "document", "to": "converter", "label": "XML 与附件"},
+    {"from": "converter", "to": "typesetting", "label": "正文与表格", "labelAt": [530, 250]},
+    {"from": "typesetting", "to": "delivery", "label": "PDF 与工程"},
+    {"from": "figure-source", "to": "vector", "label": "矢量导出"},
+    {"from": "vector", "to": "typesetting", "label": "论文插图"}
+  ]
+}

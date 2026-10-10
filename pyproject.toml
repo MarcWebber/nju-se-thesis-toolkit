@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nju-se-thesis"
+version = "0.5.0"
+description = "工程论文写作与交付工具"
+requires-python = ">=3.9"
+dependencies = ["pypdf>=5,<7"]
+
+[project.optional-dependencies]
+plots = ["matplotlib>=3.8,<4"]
+similarity = ["rapidfuzz>=3,<4"]
+references = ["pybtex>=0.26,<0.27"]
+
+[project.scripts]
+thesis = "thesis_cli.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["thesis_cli*"]
+
+[tool.setuptools.package-data]
+thesis_cli = ["*.mjs"]
+
+[tool.setuptools.data-files]
+"share/nju-se-thesis/docs" = ["docs/integrations.md"]
+"share/nju-se-thesis/skill" = [".agents/skills/nju-se-thesis/SKILL.md"]
+"share/nju-se-thesis/skill/references" = [".agents/skills/nju-se-thesis/references/*.md"]
+"share/nju-se-thesis/skill/agents" = [".agents/skills/nju-se-thesis/agents/*.yaml"]
+"share/nju-se-thesis/thesis-calibrate" = [".agents/skills/thesis-calibrate/SKILL.md"]
+"share/nju-se-thesis/examples/figures" = ["examples/figures/*.json", "examples/figures/*.svg", "examples/figures/README.md"]
+"share/nju-se-thesis/examples/figures/benchmark" = ["examples/figures/benchmark/*.py", "examples/figures/benchmark/*.csv"]
+"share/nju-se-thesis/examples/document-import" = ["examples/document-import/*.py", "examples/document-import/*.xml", "examples/document-import/*.json", "examples/document-import/*.csv", "examples/document-import/README.md"]
+"share/nju-se-thesis/examples/document-import/assets" = ["examples/document-import/assets/*.svg", "examples/document-import/assets/*.pdf"]
