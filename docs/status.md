@@ -10,7 +10,7 @@ reviewer 仅输出带位置和依据的评审建议，正文修订由 writer 或
 
 [飞书报告](https://bytedance.sg.larkoffice.com/docx/IYYfdJRrWoqvp0xwPf3la5KRgjg)记录当前能力与待办。0.5.0 wheel 在本地；PDF、交付包和新版 wheel 的飞书附件上传等待用户对具体文件和目标的授权。报告旧 wheel 附件尚未包含引用兼容修复及本次新增能力。
 
-本地 Git 仓库已初始化，分支为 `main`，远端地址待指定。仓库级提交身份为 `MarcWebber <211250110@smail.nju.edu.cn>`。GitHub 当前账号已核对；邮箱验证状态因现有授权缺少查询权限而待核实，本机可用提交签名尚未配置。私人参考、本地账号与环境、生成物和飞书同步配置均由 Git 忽略。
+本地 Git 仓库的 `main` 已推送到[私有 GitHub 仓库](https://github.com/MarcWebber/nju-se-thesis-toolkit)，`origin/main` 与本地提交一致。仓库级提交身份为 `MarcWebber <211250110@smail.nju.edu.cn>`。GitHub 当前账号已核对；邮箱验证状态因现有授权缺少查询权限而待核实，本机可用提交签名尚未配置。私人参考、本地账号与环境、生成物和飞书同步配置均由 Git 忽略。
 
 ## 预览修复
 
