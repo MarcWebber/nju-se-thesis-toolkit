@@ -1,15 +1,53 @@
 # 工程论文工具集 (`nju-se-thesis-toolkit`)
 
-这套工具帮助南京大学软件学院专业硕士把手里已有的项目代码、设计文档和实验记录整理成学位论文。你可以让 AI 助手对照真实工程材料起草章节、梳理实现逻辑、润色文风，再用配套的命令行工具完成图表绘制、文献整理和 LaTeX 排版编译。
+帮助南京大学软件学院专业硕士把项目代码、设计文档和实验记录整理成学位论文的 AI 技能与命令行工具集。
 
-## 开始写一个章节
+[![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB)](pyproject.toml) [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-把仓库里的两个 Skill 目录复制到你论文项目的 `.agents/skills/` 下，支持该目录约定的 AI 助手就能直接读取任务说明：
+[核心功能](#核心功能) · [快速开始](#快速开始) · [使用示例](#使用示例) · [文档](#文档) · [贡献](#贡献) · [许可证](#许可证)
 
-- [论文写作 Skill](.agents/skills/nju-se-thesis/SKILL.md)（`.agents/skills/nju-se-thesis/`）：结合代码、设计材料与实验记录协助起草正文、生成图表、转换飞书稿件和调用编译。
-- [文风校准 Skill](.agents/skills/thesis-calibrate/SKILL.md)（`.agents/skills/thesis-calibrate/`）：对照参考论文或你的样文逐段审阅，指出重复、空泛或逻辑不顺的地方。审稿角色（reviewer）只给修改建议，由写作者或你本人修改正文；当前先在对话中返回评审建议，飞书局部评论写回待权限验收。
+## 核心功能
 
-如果只是纯文字讨论和预览草稿，复制上述目录后就能开始，无需先装 Python 或 TeX；若要让助手直接读写你的飞书文档，还需在本地配置并授权 `lark-cli`。准备好后，可以这样向助手发起任务：
+- **论文起草与代码梳理**：结合真实工程代码、设计说明和实验记录起草章节，在飞书文档中维护正文、图表与引用修改。
+- **参考审阅与文风校准**：对照指定参考论文或作者本人样文逐段审阅；审稿角色（reviewer）只给修改建议，由写作者或作者本人修改正文。
+- **文献检索与元数据核对**：通过 OpenAlex 检索相关论文，使用 Crossref 核对 DOI 与 BibTeX 书目信息，调用 Docling 解析 PDF 原页。
+- **图表生成与飞书转换**：将 CSV 实验数据绘制成统计图或三线表，将飞书导出的文档转换为 TeX 正文片段。
+- **模板编译与中文 PDF 检查**：基于 `NJUThesis v1.5.1` 标准样例组稿编译，默认运行 PDF.js 全页检查并排查中文字体映射与缺字问题。
+
+## 快速开始
+
+本仓库为私有仓库（源码版本 `0.5.0`），获取仓库访问权限后可直接从源码克隆安装。工具集由两部分组成：`Skills` 是给 AI 助手读取的任务说明，配套 `CLI` 是实际执行文件转换、绘图和编译的本地命令行程序（非 MCP 服务）。
+
+### 1. 复制 Skill 到你的论文工作区
+
+如果目前只进行正文起草和文字讨论，只需克隆本仓库并将两个 Skill 目录复制到你的论文工作区（请将 `/path/to/thesis-project` 替换为你的实际目录）：
+
+```bash
+git clone https://github.com/MarcWebber/nju-se-thesis-toolkit.git
+cd nju-se-thesis-toolkit
+mkdir -p /path/to/thesis-project/.agents/skills
+cp -R .agents/skills/nju-se-thesis .agents/skills/thesis-calibrate /path/to/thesis-project/.agents/skills/
+```
+
+支持 `.agents/skills/` 目录约定的 AI 助手加载工作区后，可通过 `$nju-se-thesis` 或 `$thesis-calibrate` 显式调用，也可由宿主环境按任务描述自动选择（是否支持自动选择取决于宿主客户端，AI 仅读取本 README 并不能自动获得调用能力）。纯文字讨论可直接开始；若需助手直接读写你的飞书文档，还需在本地配置并授权 `lark-cli`（飞书局部评论写回目前待权限验收）。
+
+### 2. 安装命令行工具（CLI）
+
+当需要执行文献检索、数据绘图、飞书转 TeX 或编译检查时，在克隆下来的工具集仓库根目录创建虚拟环境并安装（要求 Python 3.9+）：
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -e '.[plots]'
+.venv/bin/thesis doctor
+```
+
+无需数据绘图可安装 `.`；需要本地相似句段比对请安装 `.[similarity]`，需要读取 BibTeX 请安装 `.[references]`。直接调用 `.venv/bin/thesis`（或其绝对路径）即可执行命令，无需依赖后续终端保持虚拟环境激活状态。上述 `pip` 命令不会自动安装 TeX、字体、PDF.js 或 Docling，请根据 `.venv/bin/thesis doctor` 的提示，对照 [文献与 PDF 工具](docs/integrations.md#安装) 和 [TeX 安装](.agents/skills/nju-se-thesis/references/tex-macos.md) 单独安装。
+
+## 使用示例
+
+### 对话任务示例
+
+在加载了 Skill 的助手中，可以直接用自然语言发起写作、核对或检查任务：
 
 ```text
 $nju-se-thesis
@@ -17,30 +55,17 @@ $nju-se-thesis
 材料：相关代码仓库路径、设计说明、实验记录
 参考：指定参考论文 PDF 或我自己的样文
 范围：系统实现章的“并发预约处理”一节
-
 请根据实际代码和设计材料，写清并发预约的处理流程与设计理由，保留原有专业术语和文献引用；需要配图时补一张时序图。如果现有材料里有缺口，请单独列出来。
 ```
 
-日常写作时，正文起草、代码说明、图表修改和引用标注都在飞书文档里完成。你可以在对话中与 AI 讨论思路、预览草稿，确认后再更新飞书；定稿后导出到 TeX 只做排版、样式调整和编译。如果看 PDF 时发现事实、措辞或图示有误，直接回飞书修改并重新导出，不必同时维护两份正文。
+也可以直接要求助手调用 CLI 完成专项核查，例如：
 
-写作需要由你提供项目事实、实验数据和已有稿件，缺失的实验或实现细节需由你补充确认。参考论文可以用来支持研究背景、理论与相关工作，或参考章节组织、论证推进与图文配合方式，但不能代替你亲自做过的工程和实验；校准个人文风时，只有你自己的样文能作为个人习惯依据。
+- `核对 DOI 10.1038/nature14539 并保存书目信息`
+- `检查这份 PDF 是否有中文缺字`
 
-## 安装命令行工具
+日常修改正文、代码说明和图表均在飞书中完成，定稿后导出到 TeX 仅做排版和编译；若在 PDF 中发现事实、措辞或图示错误，请退回飞书修改源稿再重新导出，不必同时维护两份正文。写作所需的项目事实与实验数据需由作者提供；参考论文可用于支撑研究背景、理论与相关工作，以及参考章节组织和论证方式，但不能冒充作者自己的实验与工程事实；校准个人文风需使用作者自己的样文。
 
-当你需要解析文献、绘制数据图表、把飞书稿件转进模板或编译 PDF 时，在下载后的仓库根目录下创建虚拟环境并安装命令行工具（要求 Python 3.9+）：
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -e '.[plots]'
-thesis doctor
-```
-
-不需要数据绘图时可只安装 `.`；需要本地相似句段比对请安装 `.[similarity]`，需要读取 BibTeX 请安装 `.[references]`。上述 `pip` 命令不会安装 TeX、字体、PDF.js 或 Docling，你可以运行 `thesis doctor` 检查外部依赖状态，按 [文献与 PDF 工具](docs/integrations.md#安装) 和 [TeX 安装](.agents/skills/nju-se-thesis/references/tex-macos.md) 单独配置。
-
-## 常用操作
-
-安装完成后，可通过 `thesis` 命令处理日常排版与核查任务，运行 `thesis --help` 可查看其余子命令：
+### 命令行常用操作
 
 | 要做什么 | 怎么做 |
 | :--- | :--- |
@@ -50,23 +75,31 @@ thesis doctor
 | 编译与检查排版 | 用 `build` 在工程副本中编译主文件并默认运行 PDF.js 全页检查。 |
 | 比对相似段落 | 用 `compare` 排查草稿与指定参考资料中字面相似的句子。 |
 
-模板组稿主要适配 `NJUThesis v1.5.1` 标准样例，正式提交前请以学院当年的格式要求为准；其余子命令可通过 `thesis --help` 查看。
+模板组稿主要适配 `NJUThesis v1.5.1` 标准样例，正式提交前请以学院当年的格式要求为准；其余子命令可通过 `.venv/bin/thesis --help` 查看。
 
-下面是检索文献与编译排版两个常用示例。请将 `/path/to/...` 替换为你的实际路径；文献检索、元数据核对与 PDF 解析等命令的输出目录须为新的空目录：
+以下示例请将 `/path/to/...` 替换为实际路径；文献检索、DOI 核对与 PDF 解析等命令的输出目录须为新的空目录：
 
 ```bash
-# 检索相关文献并输出到新目录
-thesis literature-search 'document parsing' --limit 5 --output output/papers
+# 检索相关文献并输出到新的空目录
+.venv/bin/thesis literature-search 'document parsing' --limit 5 --output output/papers
 
 # 在工程副本中编译主文件（默认运行 PDF.js 全页检查）
-thesis build /path/to/main.tex /path/to/compiled
+.venv/bin/thesis build /path/to/main.tex /path/to/compiled
 ```
 
-工具核对的文献元数据不能代替你阅读原文确认论断，扫描件解析结果也建议回原页核对。`build` 和 `inspect-pdf` 的自动检查不能代替逐页审阅最终 PDF 页面；编译虽禁用了 shell escape，但仍非操作系统沙箱，请只编译来源可信的 TeX 工程。
+文献题录核对不能代替阅读原文确认论断，扫描件 OCR 解析结果建议回原页核对；`compare` 仅比对所传入的指定资料。自动检查不能代替逐页审阅最终 PDF 页面；编译虽禁用了 shell escape，但并非操作系统沙箱，请只编译来源可信的 TeX 工程。
 
-## 更多文档
+## 文档
 
-- **写作与阅读**：[写作指南](.agents/skills/nju-se-thesis/references/nju-se-engineering.md) · [参考阅读说明](references/README.md)
-- **图表与转换**：[图表说明](.agents/skills/nju-se-thesis/references/diagrams.md) · [图例](examples/figures/README.md) · [转换样例](examples/document-import/README.md)
-- **模板与环境**：[模板组稿](.agents/skills/nju-se-thesis/references/template.md) · [TeX 安装](.agents/skills/nju-se-thesis/references/tex-macos.md) · [南大在线平台](.agents/skills/nju-se-thesis/references/nju-platform.md) · [文献与 PDF 工具](docs/integrations.md)
-- **状态与记录**：[使用状态](docs/status.md) · [真实接入验收](docs/delivery-check-20261008.md) · [验证记录](docs/validation.md)
+- **Skill 说明**：[论文写作 Skill](.agents/skills/nju-se-thesis/SKILL.md) · [文风校准 Skill](.agents/skills/thesis-calibrate/SKILL.md)
+- **写作与图表**：[写作指南](.agents/skills/nju-se-thesis/references/nju-se-engineering.md) · [参考阅读说明](references/README.md) · [图表说明](.agents/skills/nju-se-thesis/references/diagrams.md)
+- **模板与环境**：[模板组稿](.agents/skills/nju-se-thesis/references/template.md) · [TeX 安装](.agents/skills/nju-se-thesis/references/tex-macos.md) · [文献与 PDF 工具](docs/integrations.md)
+- **进展与记录**：[使用状态](docs/status.md) · [验证记录](docs/validation.md)
+
+## 贡献
+
+发现问题或提交改进请直接在仓库的 [Issues](https://github.com/MarcWebber/nju-se-thesis-toolkit/issues) 或 [Pull Requests](https://github.com/MarcWebber/nju-se-thesis-toolkit/pulls) 中提出。
+
+## 许可证
+
+本项目采用 [MIT 许可证](LICENSE)。

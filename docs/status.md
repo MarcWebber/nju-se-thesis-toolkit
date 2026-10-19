@@ -52,6 +52,8 @@ reviewer 仅输出带位置和依据的评审建议，正文修订由 writer 或
 
 当前文库为“论文工具集 · 公开参考文献”，自动导出到 [zotero-public.bib](../references/zotero-public.bib)。两篇实际导出的论文均经 Crossref 核对；整篇编译自动拉取该集合，生成 22 页 PDF，全页对照通过。见[真实接入验收](delivery-check-20261008.md)。
 
+2026-10-20，README 按项目简介、核心功能、快速开始、示例、文档与许可证重新组织；主 Skill 的发现描述补入文献检索、DOI 核对与中文 PDF 检查。调用说明补充 CLI 绝对路径定位、子命令帮助、退出码和跨项目依赖配置。Codex 的 skills/list 已在独立临时工作区发现两个 Skill，均为 repo 范围且 enabled=true；本会话在该目录实际调用 Crossref、代码摘录与 PDF.js：DOI 10.1038/nature14539 返回 Deep learning；代码摘录保留真实提交与行号；修复版 PDF 的封面显示 89 个汉字，原问题 PDF 检出 5 个字体映射风险并返回退出码 2。本轮检查了 22 页 PDF 的结构并渲染封面，未重新验收全页；这证明当前助手的实际调用，其他模型的自动选择效果仍取决于宿主，尚未独立评测。记录见 [Skill 调用核对](../output/skill-entry-20261020/)。源码已更新，现有 wheel 尚未重建。
+
 ## 本机入口
 
 在工具集根目录直接运行现有环境，不需要重新安装：
@@ -61,7 +63,7 @@ reviewer 仅输出带位置和依据的评审建议，正文修订由 writer 或
 .venv/bin/thesis doctor
 ```
 
-本机 Python 3.9.6、pypdf 6.17.0、Matplotlib 3.9.4、RapidFuzz 3.13.0 可用；latexmk、XeLaTeX 和 Biber 能定位。现有 `.venv` 未安装 pip，但 CLI 与依赖运行正常。此目录没有 `.git`，本轮按实际文件核对，未提供提交版本或 Git 变更清单。
+本机 Python 3.9.6、pypdf 6.17.0、Matplotlib 3.9.4、RapidFuzz 3.13.0 可用；latexmk、XeLaTeX 和 Biber 能定位。现有 `.venv` 未安装 pip，但 CLI 与依赖运行正常。本地仓库已初始化 Git，并跟踪 GitHub 的 `origin/main`。
 
 2026-10-08 核对：Lark CLI 为 1.0.80，NjuCLI 为 0.1.0。NjuCLI 已在 PATH，可直接调用：
 
@@ -71,7 +73,7 @@ njucli tex --help
 
 新分发包为 [nju-se-thesis 0.5.0](../dist/nju_se_thesis-0.5.0-py3-none-any.whl)，包含生产模块、PDF.js 调用脚本、两个 Skill、接入说明与许可证；重型解析依赖和模型独立安装。独立安装的命令与文件验证见[本次记录](../output/integrations-20261008/)。历史 0.4.0 和 0.2.0 包保留；现有飞书附件仍是旧版，未在本轮上传新附件。
 
-在另一个论文项目中使用时，将两个 Skill 复制到该项目的 `.agents/skills/`；文件转换、绘图与编译需要安装 CLI，纯写作无需 Python 或 TeX。通用安装步骤见 [README](../README.md#安装)。
+在另一个论文项目中使用时，将两个 Skill 复制到该项目的 `.agents/skills/`；文件转换、绘图与编译需要安装 CLI，纯写作无需 Python 或 TeX。通用安装步骤见 [README](../README.md#快速开始)。
 
 ## 首个任务
 

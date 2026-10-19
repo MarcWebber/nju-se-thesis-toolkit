@@ -17,6 +17,29 @@
 
 `thesis doctor` 只查看依赖能否定位，不核验登录、宏包或版式。实际编译以本次 PDF 与完整日志为准。
 
+## 安装与跨项目调用
+
+仅将 `.agents/skills/` 目录复制到论文工作区不会安装 `thesis` 命令行工具。若当前环境尚未安装 CLI，需从有访问权限的仓库克隆源码并安装到虚拟环境中（克隆位置由用户实际目录决定，以下用 `/path/to/nju-se-thesis-toolkit` 表示）：
+
+```bash
+git clone https://github.com/MarcWebber/nju-se-thesis-toolkit.git /path/to/nju-se-thesis-toolkit
+cd /path/to/nju-se-thesis-toolkit
+python3 -m venv .venv
+.venv/bin/python -m pip install -e '.[plots]'
+```
+
+按任务需要可将安装目标换为基础包 `.`、本地相似比对 `.[similarity]` 或 BibTeX 支持 `.[references]`。安装时直接调用 `.venv/bin/python`，无需执行 `source` 激活虚拟环境。
+
+当你在其他论文工作区（当前工作目录不在工具集仓库内）调用已安装的 CLI 时，直接使用可执行文件的绝对路径 `/path/to/nju-se-thesis-toolkit/.venv/bin/thesis`。PDF.js 和 Docling 除从当前工作目录向上查找 `.tools` 外，也会检查 CLI 模块所在的项目根目录；跨项目调用时可先运行 `doctor` 确认是否已自动定位，仅当自定义位置下的已安装工具无法自动定位时，按下方示例通过环境变量显式指定路径：
+
+```bash
+THESIS_PDFJS_MODULES=/path/to/nju-se-thesis-toolkit/.tools/pdfjs/node_modules \
+THESIS_DOCLING=/path/to/nju-se-thesis-toolkit/.tools/docling/bin/docling \
+/path/to/nju-se-thesis-toolkit/.venv/bin/thesis inspect-pdf /path/to/paper.pdf --preview-dir /path/to/preview
+```
+
+注意：传入上述路径前，需确认对应的外部依赖已实际安装完成，不能仅凭目录路径形式就当作依赖可用。若尚未安装 TeX、字体、PDF.js 或 Docling，请先参照仓库中的 `docs/integrations.md`（或在线文档 <https://github.com/MarcWebber/nju-se-thesis-toolkit/blob/main/docs/integrations.md#安装>）完成配置，再执行具体命令。
+
 ## 来源
 
 - [NJUThesis](https://github.com/nju-lug/NJUThesis)：模板，自动组稿支持 v1.5.1 标准样例，LPPL-1.3c+。使用作者提供的工程，不复制模板实现。
