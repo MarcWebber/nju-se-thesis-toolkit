@@ -1,12 +1,14 @@
 # 使用状态
 
-写作状态核对日期：2026-10-10；工具运行结果来自 2026-10-08 验收。当前为 **0.5.0，两个 Skill、19 个独立命令**，已接入中文 PDF 检查、OpenAlex / Crossref、Zotero 导出接口和 Docling。完整试用稿已通过文献同步、本地编译、中文映射修复与 PDF.js 22 页对照。用法见[文献与 PDF 工具](integrations.md)。真实 Zotero 集合已接通，自动导出与编译前刷新通过；南大线上整篇编译、飞书局部评论、Codex 实际面板与正式论文验收仍待完成。
+写作状态核对日期：2026-10-20；工具运行结果来自 2026-10-08 验收。当前为 **0.5.0，两个 Skill、19 个独立命令**，已接入中文 PDF 检查、OpenAlex / Crossref、Zotero 导出接口和 Docling。完整试用稿已通过文献同步、本地编译、中文映射修复与 PDF.js 22 页对照。用法见[文献与 PDF 工具](integrations.md)。真实 Zotero 集合已接通，自动导出与编译前刷新通过；南大线上整篇编译、飞书局部评论、Codex 实际面板与正式论文验收仍待完成。
 
 内容源稿保存在飞书。章节写作、代码说明、引文修订与图示修改先在飞书完成，再导出到 TeX 工程排版和编译。
 
-[写作审阅](writing-review-20261010.md)发现，试用稿的工具说明和交付记录占据了正文，具体问题、设计理由和结果分析展开不足。[agent.yaml](../.agents/skills/nju-se-thesis/agents/agent.yaml)已定义材料分析、正文写作和事实审阅，并由主 Skill 读取。Gemini Argon 是正文写作者偏好，实际入口与模型 ID 待确认；尚未进行外部模型写作或同材料比较。
+[写作审阅](writing-review-20261010.md)发现，试用稿的工具说明和交付记录占据了正文，具体问题、设计理由和结果分析展开不足。[agent.yaml](../.agents/skills/nju-se-thesis/agents/agent.yaml)已定义材料分析、正文写作和事实审阅，并由主 Skill 读取。
 
-reviewer 仅输出带位置和依据的评审建议，正文修订由 writer 或作者完成。当前 reviewer 为本助手，MiniMax M3 列为待实测候选。角色 YAML 是指令约定；外部模型的实际调用与只读执行隔离尚待接入验证。
+2026-10-20，通过用户指定的[豆包先锋客户端](https://doubao.byteintl.net/chat/879822754579)选择 Gemini-4-Argon Deep，完成两个 Skill 共十处描述的改写；由 Gemini 负责措辞拟定，当前助手负责逻辑核对，期间对出现语义偏移的条目退回重修后定稿。本次仅为客户端界面交互调用，`agent.yaml` 中的程序化调用入口与模型 ID 尚未接入，MiniMax M3 仍保留为候选模型，正式论文章节的写作效果有待后续实测。
+
+reviewer 仅输出带位置和依据的评审建议，正文修订由 writer 或作者完成。当前 reviewer 为本助手，MiniMax M3 列为待实测候选。角色 YAML 是指令约定；外部模型的程序化调用与独立只读执行隔离尚待接入验证。
 
 [飞书报告](https://bytedance.sg.larkoffice.com/docx/IYYfdJRrWoqvp0xwPf3la5KRgjg)记录当前能力与待办。0.5.0 wheel 在本地；PDF、交付包和新版 wheel 的飞书附件上传等待用户对具体文件和目标的授权。报告旧 wheel 附件尚未包含引用兼容修复及本次新增能力。
 
@@ -32,7 +34,7 @@ reviewer 仅输出带位置和依据的评审建议，正文修订由 writer 或
 
 | 任务 | 入口 | 当前状态与范围 |
 |---|---|---|
-| 材料梳理、提纲、文献与章节写作 | `$nju-se-thesis`、`agent.yaml` | 三项写作职责已定义；已审阅试用稿并给出一段有代码依据的改写。Gemini 调用、同材料比较和作者文风确认待完成 |
+| 材料梳理、提纲、文献与章节写作 | `$nju-se-thesis`、`agent.yaml` | 三项写作职责已定义；豆包先锋 Gemini-4-Argon Deep 已完成两份 Skill 的描述改写。程序化模型调用、正式章节比较和作者文风确认待完成 |
 | 仓库分析与代码证据 | 主 Skill、`excerpt` | 代理分析机制，CLI 保存行段、原始代码与哈希；此前实际摘录成功 |
 | 文风审阅 | `$thesis-calibrate` | 可以阅读材料并给出建议；飞书局部评论尚缺权限，写回与页面标记未验收 |
 | 文献发现与引用关系 | `literature-search` | 关键词检索、引用文献与被引论文展开均通过公开 API 实际调用；保存候选和原始响应 |
