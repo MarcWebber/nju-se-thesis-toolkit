@@ -1,5 +1,38 @@
 # 验证记录
 
+## 2026-10-30 协作问题排查 Skill
+
+本轮新增 `collaboration-troubleshooting` Skill。它包含 `SKILL.md` 和 4 份 references，覆盖 11 类通用协作问题，每类都给出定位、修复和确认方式。README 增加了发现说明、单独复制安装方法和调用示例；`nju-se-thesis` 增加了按需调用入口；通用复盘链接到各份处置文件；`pyproject.toml` 收录了新 Skill 及其 4 份参考。工具集现有 3 个 Skill，CLI 保持 19 个命令，版本为 0.5.0。本轮更新只涉及工具集，个人论文事实与偏好继续通过 `references/local` 按需读取。
+
+客观检查结果如下：
+
+- 三份 Skill 均通过 `quick_validate`，`git diff --check` 通过，现有 CLI 的帮助命令实际运行成功。
+- 78 个本地 Markdown 链接及标题锚点全部通过检查。
+- 主助手在独立临时工作区复制三个 Skill，再调用 Codex app-server 的 `skills/list`，三个 Skill 均返回 `scope=repo`、`enabled=true`。这项调用读取的是技能元数据。
+- 实际构建的 wheel 中有 24 项 Skill 文件，均与工作区逐字节一致，其中 5 项属于新 Skill；私人本地资料位于分发范围之外。`roles-and-sources.md` 的最后一轮修正落盘后，主助手重新构建并核对最终包，结果以 `wheel-check.json` 的最新回执为准。
+
+撰写来源：新 Skill 正文以及 README、主论文 Skill 入口和通用复盘中的新增文字，由 agy 中的 Claude Opus 5.5（`claude-opus-5-5-high`）撰写。主助手负责提供源材料和逻辑建议、机械应用文本，并运行工具核验。Gemini 的调用因额度受限返回空输出，实际采用的文字来自 Opus。
+
+产物位于 `output/troubleshooting-20261030/`：`authorship/` 保存原始生成和修订回答，`skill-discovery.json` 是技能发现回执，`links.json` 是链接回执，`wheel-check.json` 是分发回执，安装包位于 `wheel/nju_se_thesis-0.5.0-py3-none-any.whl`。
+
+适用范围：以上检查确认了内容结构、技能发现、链接引用和分发范围。修复效果是否理想，需要使用者在后续真实任务中观察和评价。
+
+## 2026-10-30 通用经验与论文资料分离
+
+[通用协作复盘](collaboration-lessons.md)汇总可复用的问题与做法。论文写作方法集中在 Skill 的 references，具体稿件的历史审阅移至仓库 references，个人论文事实与偏好保存在 Git 忽略的本地资料目录。Skill 入口及角色配置按用户当前选择工作。
+
+两份 Skill 元信息、角色 YAML、69 个本地链接及其标题锚点、Git 差异空白检查通过。使用现有 setuptools 实际构建 0.5.0 wheel，包内 18 项 Skill 文件与当前工作区逐字节一致；本地项目资料保持在分发范围之外。产物与回执保存在 `output/reference-separation-20261030/`。
+
+本轮验证覆盖资料分层、引用路径和分发内容；实际写作效果由后续真实任务与作者阅读评价。
+
+## 2026-10-29 写作规范复盘
+
+本次调整依据作者对真实稿件的反馈，更新主 Skill、角色分工、材料与提纲、章节写作、全文修订和图表说明，可复用经验现集中保存在[通用复盘](collaboration-lessons.md)，领域方法见 Skill 的 references。
+
+两份 Skill 的元信息检查、角色 YAML 解析、57 个本地文档链接和 Git 差异空白检查通过。现有 CLI 帮助实际运行成功，保持 19 个命令。通过现有 setuptools 构建 0.5.0 wheel，包内主 Skill、角色配置及参考文件共 17 项与工作区逐字节一致；产物和回执位于 `output/writing-lessons-20261029/`。
+
+本轮完成规范、配置、链接和分发检查。新规范的写作效果继续由作者结合真实稿件评价，后续论文写作沿用作者指导和已认可的章节范围。
+
 ## 2026-10-11 远程仓库
 
 已在 `MarcWebber` 账号下创建[私有 GitHub 仓库](https://github.com/MarcWebber/nju-se-thesis-toolkit)，将本地 `main` 推送为远端默认分支。首次提交 `ede5605` 已通过 GitHub API 与 `git ls-remote` 分别回读，远端提交与本地一致。仓库级 Git 凭据读取复用现有 `gh` 登录态，后续普通 Git 命令可以访问 `origin`。提交仍为普通未签名提交；邮箱验证状态待具有查询权限时核实。
@@ -12,7 +45,7 @@
 
 ## 2026-10-10 写作分工与稿件审阅
 
-读取既有五章正文，并回读飞书版本 27 的问题、设计和验证章节。审阅发现制作备注、命令清单和交付检查挤占了论文论证；已依据 `documents.py` 改写“材料流向”首段，见[审阅与改写](writing-review-20261010.md)。本次改写由当前助手完成，未写入原稿。
+读取既有五章正文，并回读飞书版本 27 的问题、设计和验证章节。具体审阅与写作示例见[历史案例](../references/writing-review-20261010.md)，保留当时的材料范围和来源记录。
 
 主 Skill 已链接 `agents/agent.yaml`，定义材料分析、正文写作、事实审阅三个职责。YAML 解析、Skill 元信息与 61 个本地链接检查通过。0.5.0 wheel 已重建，为 121,119 字节、59 个条目；包内角色定义、Skill 入口和审阅指南与工作区逐字节一致。CLI 实现与依赖未改动，本轮未重复此前的编译和服务验收，也未新增自动测试套件。
 

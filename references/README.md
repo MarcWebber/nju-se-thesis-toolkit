@@ -1,5 +1,9 @@
 # 论文参考
 
+**资料按用途存放：** 论文写作方法见 [Skill 写作指南](../.agents/skills/nju-se-thesis/references/nju-se-engineering.md)及同目录参考；具体稿件的审阅案例保存在本目录；个人论文事实、作者偏好和稿件状态保存在 `local/`，由 `local/index.md` 按需引导。[通用协作复盘](../docs/collaboration-lessons.md)独立整理可复用的问题与做法。
+
+试用稿的历史审阅见 [2026-10-10 审阅案例](writing-review-20261010.md)，其中调用状态和模型信息按记录日期理解，当前任务沿用作者最新选择。
+
 写作与文风校准直接读取用户指定的参考原文。本机材料见 `local/index.md`；公开论文候选见 [南大硕士论文](nju-masters-2025-2026.md)。候选名单不等于已读范文。
 
 ## 本地材料
